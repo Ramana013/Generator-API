@@ -1,0 +1,123 @@
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: #1a1a1a;
+    background: #f7f7f9;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.topbar {
+    background: #1a2b5c;
+    color: white;
+    padding: 12px 0;
+}
+.topbar .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.topbar a { color: white; text-decoration: none; margin-left: 16px; }
+.topbar .brand { font-size: 1.1rem; font-weight: bold; margin-left: 0; }
+
+h1 { margin-top: 0; }
+
+.card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+label { display: block; margin-bottom: 14px; font-weight: 500; }
+input, textarea {
+    display: block;
+    width: 100%;
+    padding: 8px 10px;
+    margin-top: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+textarea { font-family: ui-monospace, Menlo, Consolas, monospace; }
+
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    border: none;
+    cursor: pointer;
+}
+.btn-primary { background: #1a2b5c; color: white; }
+.btn-pdf     { background: #f3e5e5; color: #8b1a1a; }
+.btn-png     { background: #e5f0e6; color: #1a5c2b; }
+
+.badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    background: #e5e5e5;
+    color: #333;
+}
+.badge-pending    { background: #ffeeba; color: #7a5c00; }
+.badge-processing { background: #cfe2ff; color: #0a3a80; }
+.badge-completed,
+.badge-success    { background: #d4edda; color: #155724; }
+.badge-partial    { background: #ffe5b4; color: #7a4a00; }
+.badge-failed     { background: #f8d7da; color: #721c24; }
+
+.muted { color: #666; }
+.error { color: #b00020; font-size: 0.9rem; }
+
+.status-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+.progress { color: #555; }
+
+table.certs {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+table.certs th, table.certs td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+}
+table.certs th { background: #fafafa; font-size: 0.9rem; text-transform: uppercase; color: #666; }
+table.certs tr:last-child td { border-bottom: none; }
+
+.messages { list-style: none; padding: 0; }
+.msg {
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+}
+.msg-error   { background: #f8d7da; color: #721c24; }
+.msg-success { background: #d4edda; color: #155724; }
+.msg-info    { background: #cfe2ff; color: #0a3a80; }
+
+.footer {
+    color: #999;
+    text-align: center;
+    padding: 30px 20px;
+}

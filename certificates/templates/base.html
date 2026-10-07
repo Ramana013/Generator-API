@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Certificate Generator{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/ui.css' %}">
+</head>
+<body>
+    <header class="topbar">
+        <div class="container">
+            <a href="{% url 'ui:submit' %}" class="brand">
+                🎓 Bulk Certificate Generator
+            </a>
+            <nav>
+                <a href="{% url 'ui:submit' %}">New job</a>
+                <a href="{% url 'ui:job-list' %}">All jobs</a>
+                <a href="/api/docs/" target="_blank">API docs</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        {% if messages %}
+            <ul class="messages">
+                {% for m in messages %}
+                    <li class="msg msg-{{ m.tags }}">{{ m }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="container footer">
+        <small>Django + DRF &middot; reportlab + Pillow</small>
+    </footer>
+</body>
+</html>

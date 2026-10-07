@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Django
+*.sqlite3
+*.log
+
+# Secrets
+.env
+
+# Generated certificates
+media/
+
+# Test artifacts
+.pytest_cache/
+.coverage
+
+# Scratch files
+payload.json
+url_test_results.txt
+schema.yaml
+
+# IDE
+.vscode/
+.idea/
+.DS_Store

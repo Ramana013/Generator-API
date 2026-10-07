@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}All jobs{% endblock %}
+
+{% block content %}
+<h1>All jobs</h1>
+
+{% if jobs %}
+<table class="certs">
+    <thead>
+        <tr>
+            <th>Created</th>
+            <th>Job</th>
+            <th>Status</th>
+            <th>Progress</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for job in jobs %}
+        <tr>
+            <td>{{ job.created_at|date:"Y-m-d H:i" }}</td>
+            <td><code>{{ job.id }}</code></td>
+            <td><span class="badge badge-{{ job.status }}">{{ job.get_status_display }}</span></td>
+            <td>{{ job.succeeded }} / {{ job.total }}
+                {% if job.failed %} ({{ job.failed }} failed){% endif %}
+            </td>
+            <td>
+                <a class="btn btn-primary" href="{% url 'ui:job-detail' job.id %}">Open</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No jobs yet. <a href="{% url 'ui:submit' %}">Create the first one</a>.</p>
+{% endif %}
+{% endblock %}

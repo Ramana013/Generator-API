@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}New certificate job{% endblock %}
+
+{% block content %}
+<h1>Generate certificates</h1>
+<p class="muted">
+    Fill in the course details and paste one recipient per line.
+    Optionally include an email using the format <code>Name &lt;email&gt;</code>.
+</p>
+
+<form method="post" class="card">
+    {% csrf_token %}
+
+    <label>
+        Course name
+        <input type="text" name="course_name" required
+               placeholder="e.g. Advanced Django">
+    </label>
+
+    <label>
+        Issued on
+        <input type="date" name="issued_on" required>
+    </label>
+
+    <label>
+        Recipients (one per line)
+        <textarea name="recipients" rows="10" required
+placeholder="Alice Smith <alice@example.com>
+Bob Jones <bob@example.com>
+Carol White"></textarea>
+    </label>
+
+    <button type="submit" class="btn btn-primary">Generate certificates</button>
+</form>
+
+<details class="card">
+    <summary>What happens next?</summary>
+    <p>
+        Each recipient receives a certificate (PDF + PNG) generated from a
+        single predefined template. You'll be taken to a status page where
+        you can download files once they're ready.
+    </p>
+</details>
+{% endblock %}

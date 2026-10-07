@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Job {{ job.id }}{% endblock %}
+
+{% block content %}
+{% if is_processing %}
+    {# Auto-refresh every 2 seconds while the worker is running #}
+    <meta http-equiv="refresh" content="2">
+{% endif %}
+
+<h1>Job {{ job.id }}</h1>
+
+<div class="status-row">
+    <span class="badge badge-{{ job.status }}">{{ job.get_status_display }}</span>
+    <span class="progress">
+        {{ job.succeeded }} / {{ job.total }} succeeded
+        {% if job.failed %} &middot; {{ job.failed }} failed{% endif %}
+    </span>
+</div>
+
+{% if is_processing %}
+<p class="muted">Processing… this page will refresh automatically.</p>
+{% endif %}
+
+<table class="certs">
+    <thead>
+        <tr>
+            <th>Recipient</th>
+            <th>Course</th>
+            <th>Status</th>
+            <th>Download</th>
+            <th>Error</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in job.certificates.all %}
+        <tr>
+            <td>
+                <strong>{{ c.recipient_name }}</strong>
+                {% if c.recipient_email %}<br><small class="muted">{{ c.recipient_email }}</small>{% endif %}
+            </td>
+            <td>{{ c.course_name }}<br><small class="muted">{{ c.issued_on }}</small></td>
+            <td><span class="badge badge-{{ c.status }}">{{ c.get_status_display }}</span></td>
+            <td>
+                {% if c.pdf_file %}
+                    <a class="btn btn-pdf" href="{{ c.pdf_file.url }}">📄 PDF</a>
+                {% endif %}
+                {% if c.png_file %}
+                    <a class="btn btn-png" href="{{ c.png_file.url }}">🖼️ PNG</a>
+                {% endif %}
+                {% if not c.pdf_file and not c.png_file %}
+                    <span class="muted">—</span>
+                {% endif %}
+            </td>
+            <td>
+                {% if c.error_message %}
+                    <span class="error">{{ c.error_message }}</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<p class="muted">
+    <a href="{% url 'ui:job-list' %}">← Back to all jobs</a>
+    &nbsp;|&nbsp;
+    <a href="/api/jobs/{{ job.id }}/" target="_blank">View JSON</a>
+</p>
+{% endblock %}
